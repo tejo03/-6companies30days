@@ -1,0 +1,22 @@
+   class Solution:
+    def getHint(self, secret: str, guess: str) -> str:
+        bulls=0
+        b_arr=[]
+        cows=0
+        for i in range(len(secret)):
+            if secret[i]==guess[i]:
+                bulls=bulls+1
+                b_arr.append(i)
+        print(b_arr)
+        while(len(b_arr)!=0):
+            secret=secret[:b_arr[-1]]+secret[b_arr[-1]+1:]
+            guess=guess[:b_arr[-1]]+guess[b_arr[-1]+1:]
+            b_arr.pop()
+        print(secret,guess)
+        for i in guess:
+            if i in secret:
+                cows=cows+1
+                ind=secret.index(i)
+                secret=secret[:ind]+secret[ind+1:]
+        ans=str(bulls)+"A"+str(cows)+"B"
+        return ans
